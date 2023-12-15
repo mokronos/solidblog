@@ -1,5 +1,4 @@
 import { createEffect, createResource, createSignal, onMount } from "solid-js";
-import { Mathjax } from "mathjax";
 
 export function Content(props: {url: string}) {
 
@@ -9,7 +8,7 @@ export function Content(props: {url: string}) {
 
     onMount(() => {
         console.log(`Content mounted`);
-        if (window.MathJax) {
+        if (typeof MathJax !== 'undefined') {
             console.log(`MathJax already loaded`);
             refreshMath();
         } else {
@@ -36,6 +35,6 @@ const fetchContent = async (name: string) => {
 }
 
 function refreshMath() {
-    window.MathJax.typeset();
+    MathJax.typeset();
     console.log(`Math refreshed`);
 }
