@@ -1,39 +1,21 @@
-import { createSignal } from 'solid-js'
-import solidLogo from './assets/solid.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
-import { Search } from "./Search";
+import { query, SearchContainer, searchActive, setSearchActive } from "./Search";
 import { Content } from "./Content";
+import { Show } from "solid-js/web";
+import { keyBind, keyBindCtrl } from "./utils";
 
 function App() {
-  const [count, setCount] = createSignal(0)
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} class="logo" alt="Vite logo" />
-        </a>
-        <a href="https://solidjs.com" target="_blank">
-          <img src={solidLogo} class="logo solid" alt="Solid logo" />
-        </a>
-      </div>
-      <h1>Vite + Solid</h1>
-      <div class="card">
-        <button onClick={() => setCount((count) => count + 4)}>
-          count is {count()}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p class="read-the-docs bg-blue-700">
-        Click on the Vite and Solid logos to learn more
-      </p>
-      <Search />
-      <Content url="ml_glossary" />
-    </>
-  )
+    keyBindCtrl('k', () => setSearchActive(searchActive() ? false : true));
+
+    return (
+            <>
+            <Show when={searchActive()}>
+            <SearchContainer />
+            </Show>
+            <Content url={query} />
+            </>
+           )
 }
 
 export default App

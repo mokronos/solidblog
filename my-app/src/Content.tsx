@@ -1,26 +1,18 @@
-import { createEffect, createResource, createSignal, onMount } from "solid-js";
+import { createEffect, createResource, on } from "solid-js";
+import type { Accessor } from "solid-js";
 
-export function Content(props: {url: string}) {
+export function Content(props: {url: Accessor<string>}) {
 
-    const [url, setUrl] = createSignal(props.url);
-    const [content] = createResource(url, fetchContent);
+    const [content] = createResource(props.url, fetchContent);
 
-
-    onMount(() => {
+    createEffect(on(content, () => {
         console.log(`Content mounted`);
-        if (typeof MathJax !== 'undefined') {
-            console.log(`MathJax already loaded`);
-            refreshMath();
-        } else {
-            let mathJaxScript = document.querySelector('#MathJax-script');
-            mathJaxScript?.addEventListener('load', refreshMath);
-        }
-    });
+        refreshMath();
+    }));
 
     return (
     <div>
     <p>Content:</p>
-    <div>{props.url}</div>
     <div innerHTML={content()}></div>
     </div>
     )
@@ -35,6 +27,11 @@ const fetchContent = async (name: string) => {
 }
 
 function refreshMath() {
-    MathJax.typeset();
-    console.log(`Math refreshed`);
+    // i dont like the mathjax solution, would be nicer to render
+    // the math equations beforehand as html + css and then just
+    // request and render the html, no need to do it clientside
+    if (typeof MathJax.typeset !== 'undefined') {
+        MathJax.typeset();
+        console.log(`Math refreshed`);
+    }
 }
