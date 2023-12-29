@@ -1,153 +1,153 @@
 [
   {
-    "date": "2020-01-01",
     "id": "0",
+    "date": "2020-01-01",
     "title": "search",
     "url": "search"
   },
   {
-    "url": "ml_glossary",
+    "id": "1",
     "title": "ml_glossary",
     "date": "2020-01-01",
-    "id": "1"
+    "url": "ml_glossary"
   },
   {
     "id": "2",
-    "url": "logic",
+    "title": "logic",
     "date": "2020-01-01",
-    "title": "logic"
+    "url": "logic"
   },
   {
     "title": "ml_resources",
-    "id": "3",
     "date": "2020-01-01",
-    "url": "ml_resources"
+    "url": "ml_resources",
+    "id": "3"
   },
   {
-    "id": "4",
-    "url": "cs50",
     "date": "2020-01-01",
-    "title": "cs50"
+    "title": "cs50",
+    "id": "4",
+    "url": "cs50"
   },
   {
     "date": "2020-01-01",
     "url": "ai",
-    "title": "ai",
-    "id": "5"
+    "id": "5",
+    "title": "ai"
   },
   {
-    "url": "sort",
     "title": "sort",
-    "id": "6",
-    "date": "2020-01-01"
+    "date": "2020-01-01",
+    "url": "sort",
+    "id": "6"
   },
   {
     "date": "2020-01-01",
-    "title": "regression",
     "id": "7",
+    "title": "regression",
     "url": "regression"
   },
   {
-    "id": "8",
-    "url": "coding",
     "title": "coding",
-    "date": "2020-01-01"
+    "url": "coding",
+    "date": "2020-01-01",
+    "id": "8"
   },
   {
     "date": "2020-01-01",
     "id": "9",
-    "title": "machine_learning",
-    "url": "machine_learning"
+    "url": "machine_learning",
+    "title": "machine_learning"
   },
   {
     "title": "classes",
-    "id": "10",
+    "url": "classes",
     "date": "2020-01-01",
-    "url": "classes"
+    "id": "10"
   },
   {
+    "date": "2020-01-01",
     "title": "notes",
-    "date": "2020-01-01",
-    "url": "notes",
-    "id": "11"
+    "id": "11",
+    "url": "notes"
   },
   {
     "date": "2020-01-01",
-    "id": "12",
     "title": "hri",
-    "url": "hri"
+    "url": "hri",
+    "id": "12"
   },
   {
     "date": "2020-01-01",
-    "id": "13",
     "url": "daily",
-    "title": "daily"
+    "title": "daily",
+    "id": "13"
   },
   {
     "url": "data_preparation",
-    "id": "14",
     "title": "data_preparation",
-    "date": "2020-01-01"
+    "date": "2020-01-01",
+    "id": "14"
   },
   {
     "title": "help",
-    "id": "15",
     "date": "2020-01-01",
+    "id": "15",
     "url": "help"
   },
   {
     "url": "docker",
-    "date": "2020-01-01",
+    "title": "docker",
     "id": "16",
-    "title": "docker"
-  },
-  {
-    "title": "how_to_code",
-    "url": "how_to_code",
-    "id": "17",
     "date": "2020-01-01"
   },
   {
     "date": "2020-01-01",
+    "url": "how_to_code",
+    "title": "how_to_code",
+    "id": "17"
+  },
+  {
+    "title": "deep_learning",
     "id": "18",
-    "url": "deep_learning",
-    "title": "deep_learning"
+    "date": "2020-01-01",
+    "url": "deep_learning"
   },
   {
     "title": "neural_network",
-    "id": "19",
     "date": "2020-01-01",
+    "id": "19",
     "url": "neural_network"
   },
   {
-    "date": "2020-01-01",
+    "id": "20",
     "title": "fakenews",
     "url": "fakenews",
-    "id": "20"
+    "date": "2020-01-01"
   },
   {
-    "id": "21",
     "title": "pytorch",
-    "url": "pytorch",
-    "date": "2020-01-01"
+    "date": "2020-01-01",
+    "id": "21",
+    "url": "pytorch"
   },
   {
+    "title": "habits",
+    "date": "2020-01-01",
     "url": "habits",
-    "date": "2020-01-01",
-    "id": "22",
-    "title": "habits"
+    "id": "22"
   },
   {
+    "url": "electric_vehicles",
     "title": "electric_vehicles",
-    "id": "23",
     "date": "2020-01-01",
-    "url": "electric_vehicles"
+    "id": "23"
   },
   {
-    "url": "tidy_data",
     "title": "tidy_data",
-    "id": "24",
-    "date": "2020-01-01"
+    "date": "2020-01-01",
+    "url": "tidy_data",
+    "id": "24"
   },
   {
     "title": "unknown",
@@ -156,15 +156,15 @@
     "id": "25"
   },
   {
-    "url": "etf_investing",
-    "date": "2020-01-01",
     "title": "etf_investing",
-    "id": "26"
+    "url": "etf_investing",
+    "id": "26",
+    "date": "2020-01-01"
   },
   {
-    "id": "27",
     "title": "bayesian_thinking",
-    "date": "2020-01-01",
-    "url": "bayesian_thinking"
+    "id": "27",
+    "url": "bayesian_thinking",
+    "date": "2020-01-01"
   }
 ]
