@@ -29,7 +29,7 @@ jobs:
         run: npm i
         working-directory: my-app
       - name: Build
-        run: npm run build
+        run: npm run build --base=/solidblog/
         working-directory: my-app
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
