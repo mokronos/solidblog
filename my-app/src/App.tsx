@@ -1,19 +1,18 @@
 import './App.css'
-import { query, SearchContainer, searchActive, setSearchActive } from "./Search";
+import { contentUrl, SearchContainer, searchActive, setSearchActive } from "./Search";
 import { Content } from "./Content";
-import { Show } from "solid-js/web";
-import { keyBind, keyBindCtrl } from "./utils";
+import { handleUrlChange, keyBindCtrl } from "./utils";
 
 function App() {
 
     keyBindCtrl('k', () => setSearchActive(searchActive() ? false : true));
+    document.addEventListener('DOMContentLoaded', handleUrlChange);
+    window.addEventListener('popstate', handleUrlChange);
 
     return (
             <>
-            <Show when={searchActive()}>
             <SearchContainer />
-            </Show>
-            <Content url={query} />
+            <Content url={contentUrl} />
             </>
            )
 }

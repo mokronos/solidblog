@@ -11,10 +11,7 @@ export function Content(props: {url: Accessor<string>}) {
     }));
 
     return (
-    <div>
-    <p>Content:</p>
     <div innerHTML={content()}></div>
-    </div>
     )
 }
 
@@ -25,6 +22,8 @@ const fetchContent = async (name: string) => {
     const text = await response.text();
     return text;
 }
+
+declare const MathJax: any;
 
 function refreshMath() {
     // i dont like the mathjax solution, would be nicer to render
