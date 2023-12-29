@@ -27,7 +27,7 @@ jobs:
       - name: Change directory
         run: cd my-app
       - name: Install dependencies
-        run: npm i
+        run: ls && npm i
       - name: Build
         run: npm run build
       - name: Deploy

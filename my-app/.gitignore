@@ -25,3 +25,4 @@ dist-ssr
 
 # custom
 public/data/*
+public/frontmatters.json
