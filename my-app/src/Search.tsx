@@ -6,7 +6,7 @@ const initialSearchIndex = 0;
 
 const [query, setQuery] = createSignal<string>("help");
 export const [contentUrl, setContentUrl] = createSignal<string>("help");
-export const [searchActive, setSearchActive] = createSignal<boolean>(true);
+export const [searchActive, setSearchActive] = createSignal<boolean>(false);
 const [searchResults, setSearchResults] = createSignal<any[]>([]);
 const [selected, setSelected] = createSignal<number>(initialSearchIndex);
 
@@ -89,7 +89,6 @@ function SearchResults() {
 
     return (
     <>
-    <p>Selected: {selected()}</p>
     <ul class="flex grow flex-col-reverse items-start overflow-y-scroll rounded-lg bg-gray-700 p-2 shadow-lg">
     <For each={searchResults()}>
     {(item, i) => <li
