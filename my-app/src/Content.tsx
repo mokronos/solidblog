@@ -16,7 +16,7 @@ export function Content(props: {url: Accessor<string>}) {
 }
 
 const fetchContent = async (name: string) => {
-    let url = `/data/${name}.html`;
+    let url = `data/${name}.html`;
     console.log(`fetching ${url}`);
     const response = await fetch(url);
     const text = await response.text();

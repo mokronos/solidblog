@@ -22,7 +22,7 @@ export function keyBind(key: string, fn: any) {
 
 export function handleUrlChange() {
 
-    const page = window.location.pathname.split('/')[1];
+    const page = window.location.pathname.split('/').pop();
 
     if (page) {
         setContentUrl(page);
