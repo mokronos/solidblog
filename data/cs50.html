@@ -1,0 +1,112 @@
+<h1>CS50 Notes</h1>
+<h2><a href="https://cs50.harvard.edu/college/2022/spring/notes/0/">Lecture 0</a></h2>
+<h2><a href="https://cs50.harvard.edu/college/2022/spring/notes/1/">Lecture 1</a></h2>
+<h3>Compiling</h3>
+<pre><code>make &lt;program_name&gt;
+</code></pre>
+<p>With file ending.</p>
+<p>Make can be used to compile most files. Then one can execute them without file ending.</p>
+<pre><code>./&lt;program_name&gt;
+</code></pre>
+<h3>Basic C syntax</h3>
+<p>No need to go over this.</p>
+<h2><a href="https://cs50.harvard.edu/college/2022/spring/notes/2/">Lecture 2</a></h2>
+<h3>Some more compiling</h3>
+<p>Make is essentially calling the language specific compilers. For C clang is called. With clang includes need to be manually added as an argument. Make does this automatically.</p>
+<p>Compiling is generally done in multiple steps:</p>
+<ol>
+<li>Preprocessing:
+<ul>
+<li>adding in includes and macros</li>
+<li>removing comments</li>
+</ul>
+</li>
+<li>Compiling
+<ul>
+<li>converts code to assembly</li>
+</ul>
+</li>
+<li>Assembling
+<ul>
+<li>converts assembly to binary, which is machine code and can be run on a CPU.</li>
+</ul>
+</li>
+<li>Linking
+<ul>
+<li>puts compiled includes in the binary code. No need to compile includes multiple times.</li>
+</ul>
+</li>
+</ol>
+<h3>Debugging</h3>
+<p>Bugs are errors in a program, so that it performs differently than expected. Finding and fixing these errors is called Debugging.</p>
+<h2><a href="https://cs50.harvard.edu/college/2022/spring/notes/3/">Lecture 3</a></h2>
+<h3>Search</h3>
+<p>Arrays are just lists of entries. Computers can only look at one entry at a time, so search algorithms are needed to look up specific entries.</p>
+<h3>Big <em>O</em></h3>
+<p>Most search algorithms try to achieve the same thing. The main difference is the running time. This is not exactly in seconds but as the complexity of the algorithm.</p>
+<p>To do that one uses the big <em>O</em> notation, which describes how much time the algorithm takes approximately dependent on the size of the problem. The most common running times are:</p>
+<ul>
+<li>\(O(n^2)\)</li>
+<li>\(O(n \log n)\)</li>
+<li>\(O(n)\)</li>
+<li>\(O(\log n)\)</li>
+<li>\(O(1)\)</li>
+</ul>
+<p>The \(O\) describes the upper bound of time steps an algorithm takes. The lower bound is described by \(\Omega\), and if the two are the same one uses \(\Theta\).</p>
+<h3>Different search algorithms</h3>
+<p><a href="/blog/search.md">Here.</a></p>
+<h3>Different sorting algorithms</h3>
+<p><a href="/blog/sort.md">Some Sort Algorithms.</a></p>
+<h3>Recursion</h3>
+<p>Recursion can be helpful to express logic, for example binary search. One needs to be careful when defining the breaking condition, so not too much memory is used by going too deep.</p>
+<h2><a href="https://cs50.harvard.edu/college/2022/spring/notes/4/">Lecture 4</a></h2>
+<p>Pointers are variables which store memory addresses where the values of other variables might be stored. It's important to know the difference, so not to copy the address and think one copied the value of the variable.<br />
+The Syntax for arrays just uses the address of the first element and adds the indices of the successive elements to that address. Same is happening with strings. Strings are just one pointer to the first character. The computer looks at the successive addresses and stops at the element <code>\0</code>.<br />
+It's important to know that when accessing uninitialized memory one can see values that have been saved by previous programs at that address. This can be dangerous, if there are passwords saved for example.<br />
+One can check memory errors with valgrind on the command line.<br />
+All this is important if one wants to make the program as efficient as possible and debug deep down. But for high level languages like python this is not as important as python mostly handles this for you, with less efficiency.</p>
+<h2><a href="https://cs50.harvard.edu/college/2022/spring/notes/5/">Lecture 5</a></h2>
+<h3>Linked lists</h3>
+<p>Linked lists are list where the elements are not stored behind each other in memory but at separate places. After the first value one needs to store a pointer to the next value, and so on.<br />
+If one wants to add a element to a normal array and the memory slot after the originally last element is already full, we have an issue. We can either copy the array to a new location in memory with enough space, which requires some runtime, or we use a linked list where adding a new element is trivial, as the element after the last element is always reserved for a pointer to a potential new element.<br />
+So if we have a constant length list, use a normal array, as the linked list would require more memory. If we might change the length of the list, use a linked list, as the overhead is less than the potential cost of copying a normal array.</p>
+<h3>Trees</h3>
+<p>Trees are just defined by nodes. A node is a data structure which has one value and can have multiple pointers to child nodes.</p>
+<h3>Other data structures</h3>
+<p>There are several other data structures like queues (first-in-first-out), stacks (last-in-first-out) and dictionaries.</p>
+<h2><a href="https://cs50.harvard.edu/college/2022/spring/notes/6/">Lecture 6</a></h2>
+<h3>Learning a new programming language</h3>
+<p>Most programming languages are pretty similar. All of them have conditions, operators, data structures and other things. Differences are often just syntax or bigger things like how they handle scopes of variables and types. All in all, if you have mastered one language it is pretty easy to learn another language up to a decent level.</p>
+<h2><a href="https://cs50.harvard.edu/college/2022/spring/notes/7/">Lecture 7</a></h2>
+<h3>Data processing</h3>
+<p>When downloading datasets or even collecting them yourself, most of them are not cleaned. Which means, there might be typos, different names for the same thing, columns which should be multiple columns and much more ugliness. Python is well equipped to clean data, especially with the help of regular expressions. However for quick fixes or searches a database language like sqlite is probably easier. To combine both, one can execute sql commands from within python with the sqlite library.<br />
+When working with databases the most important thing is to escape user input to avoid injection attacks. When working with multiple servers and multiple users one should lock data that is currently changed by one server. Otherwise a second server might change the same data at the same time and one change gets lost or even worse unintended stuff happens.</p>
+<h2><a href="https://cs50.harvard.edu/college/2022/spring/notes/8/">Lecture 8</a></h2>
+<h3>The internet</h3>
+<h4>IP</h4>
+<p>The internet is basically just a big web of all the routers and in extension the computers/devices and servers of a lot of people in the world. One can send information to any other point in that web. To achieve that, one needs the internet protocol (IP) to tell the routers where to send the information.</p>
+<h4>TPC/UDP</h4>
+<p>TPC is another protocol that helps with sending information to different programs of one IP address. It also allows sending large chunks of data in multiple parts. If the user has a bad connection certain parts can be sent again instead of all the parts. UDP is a protocol that allows sending large amounts of data, but it doesn't grantee delivery. This is useful for calls or other real time applications as one doesn't want to wait for new data, just to resend earlier data to get the perfect result.</p>
+<h4>DNS</h4>
+<p>When you type in a address in your web browser the computer and then your router somehow needs to know what IP address corresponds to the web address. This is done with DNS servers, which have huge lists which save these correspondences. So your router always first contacts a DNS server and gets a IP address back, which then can be used to contact the correct server to get the information one wants.</p>
+<h3>Clientside</h3>
+<h4>HTTP</h4>
+<p>Browsers use Hypertext Transfer Protocol (HTTP) to interface with TPC/IP packets. HTTPS ensures the packets that arrive at the browser are encrypted.</p>
+<h4>URL</h4>
+<p>A web address like <a href="https://www.google.com">https://www.google.com</a> is also called a URL.</p>
+<h4>GET/POST</h4>
+<p>GET and POST requests can be used by browsers to request content from servers.<br />
+You can use <code>curl</code> on the command line to check the headers of the responses of servers to GET requests.</p>
+<pre><code class="language-zsh">curl -I -X GET https://www.harvard.edu/
+</code></pre>
+<p>The status codes one gets back can then be interpreted and used to modify the request to get the correct response.</p>
+<h4>HTML</h4>
+<p>Hypertext Markup Language is used to tell the browser what and how to display information. It is however not a programming language.</p>
+<h4>CSS</h4>
+<p>To style HTML one can use Cascading Style Sheets (CSS) which isn't a programming language either.</p>
+<h4>JavaScript</h4>
+<p>To change elements and styling one can use JavaScript, which is a programming language. It will be executed on the device of the user.</p>
+<h2><a href="https://cs50.harvard.edu/college/2022/spring/notes/9/">Lecture 9</a></h2>
+<h3>Web server programming</h3>
+<p>A framework like flask or django can be used to program a server with python to send responses to users. So when the user types in a certain URL or clicks on a link, the server sends data in terms of a HTML page, CSS and JavaScript back. This data can be dynamically generated with the full power of python. The python code then communicates on the server with a database, sometimes on another server.<br />
+This enables accounts and other things where the website needs to remember stuff about the user. Often times, for example for autocomplete it is helpful to use a mix of JavaScript and serverside code to accelerate the results, as responses from the server take some time compared to calculations on device.</p>

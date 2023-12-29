@@ -1,0 +1,78 @@
+<h1>Sorting algorithms</h1>
+<p>Implementation of different search algorithms in python.</p>
+<p>Sample Array:</p>
+<pre><code class="language-python">x = [3,1,4,5,9,6,2]
+</code></pre>
+<p>Goal:</p>
+<p>Sort array from lowest to highest entry and return it.</p>
+<h2>Selection sort</h2>
+<p>Go through whole list and find the lowest number. Swap that number with the first number in the list. Start with one position to the right and repeat.</p>
+<pre><code class="language-python">def selection(input):
+
+    for i in range(len(input)):
+
+        min_idx = i
+        for j in range(i,len(input)):
+            if input[j] &lt; input[min_idx]:
+                min_idx = j
+        
+        input[i], input[min_idx] = input[min_idx], input[i]
+
+    return input
+</code></pre>
+<p>Complexity:<br />
+$O(n^2)$<br />
+$\Omega(n^2)$</p>
+<h2>Bubble sort</h2>
+<p>Go through list and check if number is higher than the following number. If yes, swap the two numbers. If no, go to the next number. Repeat from the first step, but end one further position to the left.</p>
+<pre><code class="language-python">def bubble(input):
+
+    for i in range(len(input)):
+        for j in range(len(input)-i-1):
+            if input[j] &gt; input[j+1]:
+                input[j], input[j+1] = input[j+1], input[j]
+
+
+    return input
+</code></pre>
+<p>Complexity:<br />
+$O(n^2)$<br />
+$\Omega(n)$</p>
+<h2>Merge sort</h2>
+<p>Divide list in middle and recursively repeat for left and right. When a list is only 1 number return it. When two of these lists got returned, they are sorted. Then they are combined again, by looking at the first entry in each list and appending the lower number to the result. Repeat until right and left are &quot;empty&quot;.</p>
+<pre><code class="language-python">def merge(input):
+
+    if len(input)==1:
+        return input
+
+    middle = len(input)//2
+
+    left, right = input[:middle], input[middle:]
+
+    left = merge(left)
+    right = merge(right)
+
+    result=[]
+
+    i = j = 0
+    while i &lt; len(left) and j &lt; len(right):
+        if left[i]&lt;right[j]:
+            result.append(left[i])
+            i+=1
+        else:
+            result.append(right[j])
+            j+=1
+    
+    if i &lt; len(left):
+        result += left[i:]
+
+    if j &lt; len(right):
+        result += right[j:]
+
+    return result
+</code></pre>
+<p>Complexity:<br />
+\(O(n \log n)\)<br />
+\(\Omega(n \log n)\)</p>
+<h2>Visualization</h2>
+<p><a href="https://www.cs.usfca.edu/~galles/visualization/ComparisonSort.html">Here.</a></p>

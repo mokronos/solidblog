@@ -1,0 +1,29 @@
+<h1>Docker</h1>
+<p>I wanted to just have a raw ubuntu install to test my dotfiles.</p>
+<ol>
+<li>Create Dockerfile</li>
+</ol>
+<pre><code class="language-dockerfile">FROM ubuntu:latest
+</code></pre>
+<ol start="2">
+<li>Build image</li>
+</ol>
+<pre><code class="language-bash">docker build -t ubuntu .
+</code></pre>
+<p>-t creates a tag for this image, to reference it later.</p>
+<ol start="3">
+<li>Run image</li>
+</ol>
+<pre><code class="language-bash">docker run --name ubuntu -td ubuntu
+</code></pre>
+<p>--name gives the container a name, so you can reference it later.<br />
+-t allocates a pseudo-TTY, so when all processes defined in Dockerfile are finished, the container will not exit.<br />
+-d keeps the container running in the background.</p>
+<ol start="4">
+<li>Attach to container</li>
+</ol>
+<pre><code class="language-bash">docker exec -i -t ubuntu /bin/bash
+</code></pre>
+<p>-i interactive mode<br />
+-t allocate a pseudo-TTY<br />
+runs bash in the container and attaches to it. Uses name specified in --name.</p>

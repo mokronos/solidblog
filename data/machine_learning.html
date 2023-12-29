@@ -1,0 +1,189 @@
+<h1>Machine Learning</h1>
+<h2>Preparation</h2>
+<p>Going Through <a href="https://cs50.harvard.edu/college/2022/spring/notes/0/">CS50</a> for refresh of some basics (<a href="/blog/cs50.md">Notes</a>).</p>
+<h2>Sources</h2>
+<p><a href="https://machinelearningmastery.com/start-here/">Roadmap/Plan</a><br />
+<a href="http://karpathy.github.io/2022/03/14/lecun1989/">Motivation/Karpathy is a cool dude</a></p>
+<h2>Problem description</h2>
+<blockquote>
+<p>Find a model or procedure that makes best use of historical data comprised of inputs and outputs in order to skillfully predict outputs given new and unseen inputs in the future. <a href="https://machinelearningmastery.com/think-machine-learning/#:~:text=Find%20a%20model%20or%20procedure%20that%20makes%20best%20use%20of%20historical%20data%20comprised%20of%20inputs%20and%20outputs%20in%20order%20to%20skillfully%20predict%20outputs%20given%20new%20and%20unseen%20inputs%20in%20the%20future.">[1]</a></p>
+</blockquote>
+<h2>Problem solution</h2>
+<blockquote>
+<p>A model or procedure that automatically creates the most likely approximation of the unknown underlying relationship between inputs and associated outputs in historical data. <a href="https://machinelearningmastery.com/think-machine-learning/#:~:text=as%20the%20following%3A-,A%20model%20or%20procedure%20that%20automatically%20creates%20the%20most%20likely%20approximation%20of%20the%20unknown%20underlying%20relationship%20between%20inputs%20and%20associated%20outputs%20in%20historical%20data.,-Again%2C%20this%20is">[1]</a></p>
+</blockquote>
+<h2>How to get there</h2>
+<h3>Define the problem</h3>
+<ul>
+<li>Describe problem informally and formally and list assumptions and similar problems</li>
+<li>List motivations for solving the problem, the benefits a solution provides and how the solution will be used.</li>
+<li>Describe how the problem could be solved manually.</li>
+</ul>
+<h3>Prepare Data</h3>
+<ul>
+<li>Consider what data is available, what data is missing and what data can be removed.</li>
+<li>Organize your selected data by formatting, cleaning and sampling from it.</li>
+<li>Transform preprocessed data into features ready for machine learning.</li>
+</ul>
+<h3>Spot check algorithms</h3>
+<ul>
+<li>create small experiment with different transformations of the dataset and different standard algorithms</li>
+<li>run every pair a bunch of times and compare mean and variance</li>
+<li>helps flushing out the problem structure and getting the algorithms on which to focus in the next steps</li>
+</ul>
+<h3>Improving Results</h3>
+<ul>
+<li>Search through parameter space to find best performing models</li>
+<li>Ensemble: combine results of multiple models</li>
+</ul>
+<h3>Present Results</h3>
+<ul>
+<li>
+<p>Define the context of the problem and the motivation</p>
+</li>
+<li>
+<p>Describe Problem as a question that got answered</p>
+</li>
+<li>
+<p>Concisely describe the solution as an answer to the question</p>
+</li>
+<li>
+<p>Specify limitations of the model, what questions it can't answer and with what probability it can answer questions</p>
+</li>
+</ul>
+<h1>Precision and Recall</h1>
+<p>Let's assume we have a dataset of 10 items and some metric with a threshold | beyond witch our correctly classified items should lie.
+X is the positive class, o is the negative class.
+To the right of the threshold the positive class is correctly classified, to the left it is not.</p>
+<p>o o o o o x x | x o x</p>
+<p>We can then calculate the true positives, false positives, true negatives and false negatives.</p>
+<h2>Confusion Matrix:</h2>
+<ul>
+<li>True Positives (TP): 2 (Number of positive items correctly classified)</li>
+<li>False Positives (FP): 2 (Number of positive items incorrectly classified)</li>
+<li>True Negatives (TN): 5 (Number of negative items correctly classified)</li>
+<li>False Negatives (FN): 1 (Number of negative items incorrectly classified)</li>
+</ul>
+<h2>Performance Metrics:</h2>
+<ul>
+<li>
+<p>Accuracy: (TP + TN) / (TP + TN + FP + FN) = 8/10</p>
+<ul>
+<li>Rate of correct classifications.</li>
+</ul>
+</li>
+<li>
+<p>Precision: TP / (TP + FP) = 2/4</p>
+<ul>
+<li>Precision is the rate of correctly predicted positives of all predicted positives. Should be high for detecting spam email. You want to let all important emails through, and it's fine if some spam get's through.</li>
+</ul>
+</li>
+<li>
+<p>Recall: TP / (TP + FN) = 2/3</p>
+<ul>
+<li>Recall is the rate of correctly predicted positives of all actual positives. Should be high for detecting thiefs. It's important to catch all of them, and fine if you pull out a few normal customers.</li>
+</ul>
+</li>
+<li>
+<p>F1 Score: 2 * (Precision * Recall) / (Precision + Recall) = 2/3</p>
+<ul>
+<li>Harmonic mean of precision and recall.</li>
+</ul>
+</li>
+<li>
+<p>Specificity: TN / (TN + FP) = 5/7</p>
+<ul>
+<li>
+<p>Rate of correct negative classifications.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h1>Things to look out for</h1>
+<h2>AUC of 1</h2>
+<ul>
+<li>AUC can be interpreted as the probability that the model will rank a random positive example higher than a random negative example, which is good.</li>
+<li>but AUC of 1 indicates a perfect model, which is likely a bug</li>
+</ul>
+<h2>Loss increasing</h2>
+<ul>
+<li>Bug</li>
+<li>Learning rate too high
+<ul>
+<li>
+<p>always start with low learning rate to check if everything works</p>
+</li>
+<li>
+<p>then adjust</p>
+</li>
+<li>
+<p>not working if loss function plateaus, or start is in a local minimum</p>
+</li>
+</ul>
+</li>
+</ul>
+<h1>Overview</h1>
+<p>This should be a high level overview of the field of machine learning.
+It can help to determine what methods to use for a given problem.
+In general it's important to know what kind of data there is and what you want to predict.
+From that you can determine what kind of model, loss function and optimization algorithm to use.</p>
+<ul>
+<li>
+<p>Predicting a quantity:</p>
+<ul>
+<li>Regression
+<ul>
+<li>Linear Regression</li>
+<li>Logistic Regression</li>
+<li>Support Vector Machines</li>
+<li>Neural Networks</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Predicting a category:</p>
+<ul>
+<li>Classification
+<ul>
+<li>Logistic Regression</li>
+<li>Support Vector Machines</li>
+<li>Neural Networks</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>add base formulas for everything</p>
+</li>
+<li>
+<p>but also add implementations for everything</p>
+</li>
+</ul>
+<h2>Feature Selection/Engineering</h2>
+<ul>
+<li>List categorical and numerical feature columns
+<ul>
+<li>numerical features are features like age, height, weight</li>
+<li>categorical features are features like weather ('sunny', rainy', 'cloudy')</li>
+<li>there can be features that seem numerical but are actually categorical, like zip code
+<ul>
+<li>their numerical values don't have a relationship with each other or the target variable</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2>Models</h2>
+<h2>Loss Functions</h2>
+<ul>
+<li>Add <a href="ml_glossary/#regularization">regularization</a> to loss function</li>
+</ul>
+<h2>Optimization Algorithms</h2>
+<ul>
+<li>Compute gradients</li>
+</ul>
+<h2>Evaluation Metrics</h2>
+<h3>Classification</h3>
+<h4>Accuracy</h4>
+<p>$accuracy = \frac{correctly\ classified\ examples}{total\ examples}$</p>

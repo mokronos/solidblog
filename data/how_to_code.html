@@ -1,0 +1,217 @@
+<h1>How to code</h1>
+<p>Notes taken from <a href="https://www.youtube.com/watch?v=N2bXEUSAiTI">&quot;What is Programming&quot;</a> by George Hotz.</p>
+<h1>Programs</h1>
+<p>Input &gt; Program &gt; Output</p>
+<p>Seems more like functional programming.</p>
+<p>C is like assembly with some syntactic sugar.</p>
+<p>Language spectra:</p>
+<ul>
+<li>Ease of use: C --&gt; Python</li>
+<li>Functional: C --&gt; Haskell</li>
+</ul>
+<p>C --&gt; C++ was functional --&gt; object oriented.</p>
+<p>Didn't really improve programmer productivity.</p>
+<p>Garbage collection improved programmer productivity.</p>
+<h1>Computer</h1>
+<ul>
+<li>Processor (CPU) --&gt; Stream of instructions</li>
+<li>Memory (RAM) --&gt; Instructions + data</li>
+</ul>
+<h2>Hello World Example</h2>
+<pre><code class="language-c">int main() {
+    printf(&quot;hello world\n&quot;);
+}
+</code></pre>
+<p>Compile with <code>gcc main.c</code> and run with <code>./a.out</code>.
+The compilation will give some errors but it will still run.
+And you can check out the instructions and memory with <code>objdump -D a.out</code>.</p>
+<h2>Program</h2>
+<ul>
+<li>.text: Instructions</li>
+<li>bss: Static data</li>
+<li>stack: local variables (control flow)</li>
+<li>heap: malloc</li>
+</ul>
+<pre><code class="language-c">void a() {
+    int variable_on_the_stack;
+    \\ return by popping off the stack
+}
+
+void b() {
+}
+
+int main() {
+    a(); // pushes the return location of the function onto the stack
+    b();
+}
+</code></pre>
+<p>So in this example, the computer starts by executing the main function.
+It then enters the a function and pushes the return location of the function onto the stack.
+The a function does whatever it does, in our example, create a variable on the stack.
+When the function ends, the variable gets popped off, so it does not exist anymore.
+Then the return location gets popped off to know where to return to, in our case the main function after a.</p>
+<p>This is &quot;real&quot; programming.</p>
+<h2>Programming for work</h2>
+<p>What does a software &quot;engineer&quot; do?</p>
+<ul>
+<li>not writing algorithms</li>
+</ul>
+<p>In reality they are just translating a (shitty) language aka &quot;business requirements&quot; into &quot;code&quot;.</p>
+<p>There are a lot of frameworks, like ruby on rails, that do a lot of the work for you (for example a website that enables users to leave their email address).
+So you don't have to code, you just have to learn some weird syntax.</p>
+<p>Ruby on rails, React (or similar) --&gt; Web app
+CRUD apps &lt;-- Create, Read, Update, Delete</p>
+<p>Frontend (View)
+Database (Model)
+Backend/Business Logic (Controller)</p>
+<p>This whole thing might soon be automated by AI.</p>
+<ol>
+<li>
+<p>Build a CRUD app contracting firm</p>
+</li>
+<li>
+<p>Record all the inputs of my developers (translators for business requirements --&gt; code)</p>
+</li>
+<li>
+<p>Train an AI model to translate &quot;business requirements&quot; --&gt; code</p>
+</li>
+</ol>
+<p>So writing these kind of apps, is nothing like writing binary search algorithms or other lower level stuff, which is taught in school.
+These two things are completely separate.</p>
+<h1>Hacking</h1>
+<p>Input --&gt; System --&gt; Output</p>
+<p>To gain access to the System you need to know:</p>
+<ul>
+<li>What input achieves my desired outcome?</li>
+</ul>
+<p>Often times you can give a system an input that it does not expect and thus manage to get access to the system.
+Figure out how to make the function behave how you want.</p>
+<h2>Pure model</h2>
+<p>Domain --&gt; Function --&gt; Range
+y = f(x)</p>
+<h2>Impure model</h2>
+<p>Function can output something outside of the range.</p>
+<h2>Example</h2>
+<p>Let's say we want to cancel a flight without paying the cancellation fee.
+We can think of a few of the inputs we have to that system (airline agent can press a button on pc to cancel flight and waive the fee):</p>
+<ul>
+<li>We can call the agent and ask them</li>
+<li>We have a huge amount of words to choose from for that conversation</li>
+<li>We can do it in person</li>
+<li>We can send an email</li>
+<li>Or we can do something unexpected, or out of bounds of the &quot;usual&quot; input, like finding personal information about the agent and blackmailing them (not recommended)</li>
+</ul>
+<p>This way we could essentially hack the system.</p>
+<h1>Guide for Software Engineers</h1>
+<h2>High Brow Software Engineering</h2>
+<ol>
+<li>Understand a complex system</li>
+<li>Modify the system to add a new feature</li>
+<li>Test and ship the new system</li>
+</ol>
+<h2>Machine Learning Engineer</h2>
+<ol>
+<li>Download a paper</li>
+<li>Implement the paper</li>
+<li>Keep doing this until you are good</li>
+</ol>
+<h1>Funnels</h1>
+<p>Funnels are essentially just a series of filters that can be applied to some group of things to get to the desired outcome.</p>
+<h2>Selling cars</h2>
+<ol>
+<li>Top of the funnel: Advertise | 10000 people</li>
+<li>Middle of the funnel: Test drive | 100 people</li>
+<li>Bottom of the funnel: Buy | 5 people</li>
+</ol>
+<h2>Getting a partner</h2>
+<ol>
+<li>Send a message | 100 people</li>
+<li>Get a response | 30 people</li>
+<li>Get a date | 5 people</li>
+<li>Lays | 2 person</li>
+<li>Partner | 1 person</li>
+</ol>
+<h2>Getting money</h2>
+<p>Capitalism.</p>
+<p>Buyers and Sellers.
+Both need to consent.</p>
+<p>So we need to convince others to give us money.</p>
+<p>How to get 1.000.000$?</p>
+<ul>
+<li>1$ from 1.000.000 people
+<ul>
+<li>online only</li>
+</ul>
+</li>
+<li>1.000$ from 1.000 people
+<ul>
+<li>A couple phone calls can be spent to close deal</li>
+</ul>
+</li>
+<li>1.000.000$ from 1 person
+<ul>
+<li>A lot of effort can be spent to close deal</li>
+</ul>
+</li>
+</ul>
+<h2>Million Subs on Instagram</h2>
+<p>Followers and Influencers.
+Both need to consent.</p>
+<p>Convince 1.000.000 others to follow you.</p>
+<ol>
+<li>Appealing content
+<ul>
+<li>&quot;Novelty&quot;</li>
+<li>&quot;Shock&quot;</li>
+<li>&quot;Beauty&quot;</li>
+<li>&quot;Sexuality&quot;</li>
+<li>&quot;Comedy&quot;</li>
+</ul>
+</li>
+<li>Be famous
+<ul>
+<li>FOMO &lt;-- Fear of missing something positive</li>
+<li>&quot;car crash&quot; &lt;-- Fear of missing out on something negative</li>
+</ul>
+</li>
+<li>Dark arts
+<ul>
+<li>Buy followers
+<ul>
+<li>Cracked accounts</li>
+<li>New accounts</li>
+</ul>
+</li>
+<li>Make Instagram private
+<ul>
+<li>Mystery (Whats behind the curtain?)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h2>Wasting time</h2>
+<p>Existentialism --&gt; You make your own meaning.</p>
+<p>Don't fall in other people's funnels.
+Don't be in skinner boxes.
+Don't be influenced by advertising.</p>
+<h1>What to learn</h1>
+<p>Object level skills, like specific frameworks, or languages, are not that important.
+They will die out at some point.</p>
+<p>Meta level skills, like how to learn, are more important.</p>
+<h2>Example Data Science</h2>
+<p>Learning statistics is more important than learning Pytorch.
+Statistics will always be useful, but Pytorch will be replaced at some point.</p>
+<h2>Knowledge Tree</h2>
+<p>Integrate new information into the tree. Build a world model.
+In the case of not knowing something you are still able to make decent decisions based on interpolation.</p>
+<p>The root of the tree might be something like physics, such that every data point that gets included in your tree can be distilled down to the smallest particles known in physics at the time.
+This enables predictions about unknown data points.</p>
+<p>Another tree root, arguably more advanced than physics, is information.
+This is based on the paradigm from before (Input --&gt; System --&gt; Output).
+This obviously includes physics as a sub tree.</p>
+<p>&quot;There are 2 hard problems in computer science: cache invalidation, naming things, and off-by-1 errors.&quot;</p>
+<h2>Leetcode Interviews</h2>
+<p>Insulting</p>
+<p>Just shows if you can grind leetcode not if you are intelligent or a good programmer.
+Programming challenges with an objective metric and a slight time limit.</p>

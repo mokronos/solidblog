@@ -1,0 +1,35 @@
+<h1>SQL vs Python vs Excel/Sheets</h1>
+<p>SQL is probably most useful, when it just comes to data manipulation and query. Excel is easier because it is more &quot;what you see is what you get&quot; due to the UI. If you need to go beyond data manipulation into machine learning python is probably the best.<br />
+To learn SQL and use python for establishing a pipeline for machine learning, the best thing might be to use python to automate SQL commands. For quick stuff google sheets is probably good to learn.</p>
+<h1>Overview</h1>
+<p>Machine Learning generally tries to recognize patterns in data to then generate new data points.
+To achieve that, one needs to generate and transform a dataset to feed into the algorithms.</p>
+<p>Mainly just notes taken from <a href="https://developers.google.com/machine-learning/data-prep">Google</a>.</p>
+<h1>Dataset Generation</h1>
+<h1>Dataset Transformation</h1>
+<h2>When to transform</h2>
+<h3>Prior to training</h3>
+<h4>Pros</h4>
+<ul>
+<li>computation only performed once</li>
+</ul>
+<h4>Cons</h4>
+<ul>
+<li>Transformations need to be reproduced at prediction time. New data can be unpredictable.</li>
+<li>need to rerun dataset generation when changing transformations, which may lead to slow iterations. Not an issue with a small dataset.</li>
+</ul>
+<h3>Within the model</h3>
+<h4>Pros</h4>
+<ul>
+<li>can always use the same data, as happen in the model.</li>
+<li>when changing transformations the same data is still used, which leads to fast iterations.</li>
+</ul>
+<h4>Cons</h4>
+<ul>
+<li>transformations can increase latency, this is the case with transformations at prediction time as well.</li>
+</ul>
+<h2>Visualizations</h2>
+<p>Always look at graphs or other visualizations of your dataset, before and after transformations to detect errors or irregularities.</p>
+<h2>Normalization</h2>
+<p>When having features with highly different ranges of numeric values it is recommended to perform normalization.
+Gradient decent can have issues and slowly converge otherwise.</p>

@@ -1,0 +1,193 @@
+<h1>Collection of terms and definitions for machine learning, statistics and data science.</h1>
+<h2>L1 Regularization</h2>
+<p>$\lambda \sum_{i=1}^n |w_i|$</p>
+<p>Penalizing the absolute value of the weights in a model.
+Compared to the L2 regularization, the weights can now drop to zero and thus can be removed from the model.</p>
+<details>
+<summary>Maths</summary>
+<p>The L1 regularization term is of the form</p>
+<p>$L_1 = \lambda \sum_{i=1}^n |w_i|$,</p>
+<p>$$L_1 = \lambda \sum_{i=1}^n |w_i|$$,</p>
+<p>where $\lambda$ is the regularization parameter, which controls how much regularization there should be, and $w_i$ is the $i,\text{th}$ weight.</p>
+</details>
+<details>
+<summary>Implementation</summary>
+<p>In pytorch we can loop over all the parameters and add their absolute values to the loss function.</p>
+<pre><code class="language-python">loss_reg_l1 = 0
+for param in model.parameters():
+    loss_reg_l1 += torch.sum(torch.abs(param))
+total_loss = loss_data + lambda * loss_reg_l1
+</code></pre>
+<p>In sklearn, most models, like the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDClassifier.html#:~:text=penalty%7B%E2%80%98l2%E2%80%99%2C%20%E2%80%98l1,0.0%2C%20inf).">SGDClassifier</a>, have a <code>penalty</code> parameter that can be set to <code>'l1'</code> to use L1 regularization.
+And the <code>alpha</code> parameter that controls the lambda.</p>
+<pre><code class="language-python">clf = SGDClassifier(penalty='l1', alpha=0.01)
+</code></pre>
+</details>
+<h2>One-hot Encoding</h2>
+<p>A way to represent categorical features as binary features.</p>
+<details>
+<summary>Example</summary>
+<p>Let's say we have a dataset with a feature <code>weather</code> that can take on the values <code>sunny</code>, <code>cloudy</code> and <code>rainy</code>.
+We can one-hot encode this feature as <code>[1, 0, 0]</code> for <code>sunny</code>, <code>[0, 1, 0]</code> for <code>cloudy</code> and <code>[0, 0, 1]</code> for <code>rainy</code>.
+Thus we created three binary features from one categorical feature.</p>
+</details>
+<h2>L2 Regularization</h2>
+<p>L2 Regularization can be used to punish large weights in a model.
+Large model weights often indicate more complex models that are more prone to overfitting.
+Thus overfitting can be reduced by driving all the weights towards zero, but not exactly zero.</p>
+<details>
+<summary>Maths</summary>
+<p>L2 Regularization adds a term to the loss function of the form</p>
+<p>$L_2 = \lambda \sum_{i=1}^n w_i^2$,</p>
+<p>where $\lambda$ is the regularization parameter, which controls how much regularization there should be, and $w_i$ is the $i,\text{th}$ weight.
+We can see that the derivative of the L2 regularization term is $2 w_i$, thus the smaller the weight, the smaller the push towards zero by the parameter update.
+So the weights almost never reach exactly zero (unless floating point stuff).</p>
+</details>
+<details>
+<summary>Implementation</summary>
+<p>In pytorch, we can use the <a href="https://pytorch.org/docs/stable/generated/torch.optim.Adam.html#:~:text=weight_decay%20(float%2C%20optional)%20%E2%80%93%20weight%20decay%20(L2%20penalty)%20(default%3A%200)"><code>weight_decay</code></a> parameter in the optimizer to change the lambda of L2 regularization.</p>
+<pre><code class="language-python">optimizer = torch.optim.Adam(model.parameters(), lr=0.001, weight_decay=0.01)
+</code></pre>
+<p>In sklearn, most models, like the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDClassifier.html#:~:text=penalty%7B%E2%80%98l2%E2%80%99%2C%20%E2%80%98l1,0.0%2C%20inf).">SGDClassifier</a>, have a <code>penalty</code> parameter that can be set to <code>'l2'</code> to use L2 regularization.
+And the <code>alpha</code> parameter that controls the lambda.</p>
+<pre><code class="language-python">clf = SGDClassifier(penalty='l2', alpha=0.01)
+</code></pre>
+</details>
+<h2>Sparse Feature</h2>
+<p>A feature that is mostly zero across all observations and is therefore sparse in the sense that it has few non-zero values.
+For example, a dataset of people and their favorite songs might have a feature for each song of 100000 songs.
+However, most people have only listened to a few songs, so most of the feature values would be zero and some ones (<a href="#one-hot-encoding">one-hot encoding</a>).</p>
+<h2>Feature Cross</h2>
+<p>A new feature that is created by combining two or more existing features.
+This is often used to create non-linearity in a linear model.</p>
+<details>
+<summary>Example</summary>
+<p>So for example, we can have the feature $x$ and a non-linear relationship to $y$.
+Instead of using a non-linear model, we can create a new feature $x^2$ and use a linear model.</p>
+</details>
+<details>
+<summary>Implementation</summary>
+<p>In pandas, one can just add another column to the dataframe with the new feature.</p>
+<pre><code class="language-python">df['x_squared'] = df['x'] ** 2
+</code></pre>
+</details>
+<h2>Activation Function</h2>
+<p>A function that is applied to the output of a layer/neuron in a model.
+It is mainly used to introduce non-linearity to the otherwise linear model.
+Popular examples are the sigmoid function, the tanh function and the ReLU function.
+The ReLU function often works better than the other two smooth functions and is easier to compute.
+This is mostly based on empirical evidence.</p>
+<p>In general, any mathematical function can be used as an activation function.
+However it is important that the function is differentiable, because we need to compute the derivative of the function for the backpropagation algorithm.</p>
+<details>
+<summary>Maths</summary>
+<p>The sigmoid function is defined as</p>
+<p>$\sigma(x) = \frac{1}{1 + e^{-x}}$.</p>
+<p>The tanh function is defined as</p>
+<p>$\tanh(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}} = \frac{e^{2x} - 1}{e^{2x} + 1}$.</p>
+<p>The ReLU function is defined as</p>
+<p>$\text{ReLU}(x) = \max(0, x)$.</p>
+</details>
+<details>
+<summary>Implementation</summary>
+<p>In pytorch, we can add the activation functions to the model definition. (
+<a href="https://pytorch.org/docs/stable/generated/torch.nn.ReLU.html">ReLU</a>,
+<a href="https://pytorch.org/docs/stable/generated/torch.nn.Sigmoid.html">Sigmoid</a>,
+<a href="https://pytorch.org/docs/stable/generated/torch.nn.Tanh.html">Tanh</a>
+)</p>
+<pre><code class="language-python">import torch.nn as nn
+x = torch.randn(1, 1)
+m = nn.ReLU()
+m = nn.Sigmoid()
+m = nn.Tanh()
+y = m(x)
+</code></pre>
+<p>or functional (
+<a href="https://pytorch.org/docs/stable/generated/torch.nn.functional.relu.html">ReLU</a>,
+<a href="https://pytorch.org/docs/stable/generated/torch.nn.functional.sigmoid.html">Sigmoid</a>,
+<a href="https://pytorch.org/docs/stable/generated/torch.nn.functional.tanh.html">Tanh</a>
+)</p>
+<pre><code class="language-python">import torch.nn.functional as F
+x = torch.randn(1, 1)
+y = F.relu(x)
+y = F.sigmoid(x)
+y = F.tanh(x)
+</code></pre>
+<p>In sklearn, we can specify the activation function for each model in the model definition, for example for the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.neural_network.MLPClassifier.html#:~:text=activation%7B%E2%80%98identity%E2%80%99%2C%20%E2%80%98logistic%E2%80%99%2C%20%E2%80%98tanh%E2%80%99%2C%20%E2%80%98relu%E2%80%99%7D%2C">MLPClassifier</a>.</p>
+<pre><code class="language-python">clf = MLPClassifier(activation='relu')
+clf = MLPClassifier(activation='logistic')
+clf = MLPClassifier(activation='tanh')
+</code></pre>
+<p>The logistic activation function is the sigmoid function in this case.
+The sigmoid function is a special case of the logistic function.</p>
+</details>
+<h2>Neural Network</h2>
+<p>A neural network is a model that consists of multiple layers of neurons.
+In general, a neural network consists of</p>
+<ul>
+<li>an input layer, whose dimensions fits the input data (features)</li>
+<li>one or more hidden layers, with weights/biases as connections and an activation function</li>
+<li>an output layer, whose dimensions fits the output data (labels)</li>
+</ul>
+<details>
+<summary>Implementation</summary>
+<p>In pytorch, we can define a neural network by subclassing the <a href="https://pytorch.org/docs/stable/generated/torch.nn.Module.html"><code>nn.Module</code></a> class.</p>
+<pre><code class="language-python">import torch.nn as nn
+
+class Net(nn.Module):
+    def __init__(self):
+        super(Net, self).__init__()
+        self.fc1 = nn.Linear(10, 20)
+        self.fc2 = nn.Linear(20, 1)
+        self.relu = nn.ReLU()
+
+    def forward(self, x):
+        x = self.fc1(x)
+        x = self.relu(x)
+        x = self.fc2(x)
+        return x
+</code></pre>
+</details>
+<h2>Vanishing Gradient</h2>
+<p>The gradient during backpropagation may vanish, i.e. approach zero, in the first few layers of a neural network if it is multiplied by low values in the deeper layers.
+This makes it hard to train earlier layers.
+In practice the ReLU activation function helps with this problem as it has a derivative of 1 compared to the sigmoid and tanh activation functions, which have very low derivatives pretty quickly.
+We need to be careful with ReLU, as it's gradient is zero for negative values, which can lead to dead ReLUs.
+This is further investigated in this <a href="https://proceedings.mlr.press/v15/glorot11a/glorot11a.pdf">paper</a> and can be fixed with a LeakyReLU, which has a linear function with a really small slope for the negative part of the ReLU, so it &quot;leaks&quot; some gradient.</p>
+<h2>Dead ReLU</h2>
+<p>A ReLU neuron is dead if it's output is always zero.
+This can happen if the weights are initialized in a way that the neuron always outputs a negative value.
+Or in general, if the ReLU unit outputs a negative value it's gradient is zero and it will never be updated.
+Thus it may never again output a positive value again and contribute to the model.
+Lowering the learning rate can keep ReLUs from dying.</p>
+<h2>Exploding Gradient</h2>
+<p>The gradient during backpropagation may explode, i.e. approach infinity, in the first few layers of a neural network if it is multiplied by high values in the deeper layers.
+This can be fixed by clipping the gradient, batch normalization or a lower learning rate.</p>
+<h2>Dropout</h2>
+<p>Dropout is a regularization technique that randomly sets some neurons to zero during training.
+This forces the model to learn a more robust representation of the data and prevents overfitting.
+During inference, all neurons are used again.</p>
+<p>In practice, there will be a probability $p$ attached to certain neurons, which determines if the neuron will be active or not.
+We can then vary the probability $p$ to add more (higher $p$) or less (lower $p$) regularization.</p>
+<details>
+<summary>Implementation</summary>
+<p>In pytorch, we can add dropout layers to the model definition.</p>
+<pre><code class="language-python">import torch.nn as nn
+
+class Net(nn.Module):
+    def __init__(self):
+        super(Net, self).__init__()
+        self.fc1 = nn.Linear(10, 20)
+        self.fc2 = nn.Linear(20, 1)
+        self.relu = nn.ReLU()
+        self.dropout = nn.Dropout(p=0.5)
+
+    def forward(self, x):
+        x = self.fc1(x)
+        x = self.relu(x)
+        x = self.dropout(x)
+        x = self.fc2(x)
+        return x
+</code></pre>
+<p>In sklearn we need a custom implementation for a dropout layer.</p>
+</details>
