@@ -4,17 +4,26 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: 'pages'
+  cancel-in-progress: true
+
 jobs:
-  convert:
-    name: Convert md to html
+  build:
+    name: Convert md to html and build app
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Setup Rust
         uses: actions-rs/toolchain@v1
         with:
-          toolchain: nightly
+          toolchain: stable
           override: true
       - name: create target folder
         run: mkdir my-app/public/data
@@ -24,15 +33,20 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 'latest'
+          node-version: 20
+          cache: npm
       - name: Install dependencies
-        run: npm i
+        run: npm install
         working-directory: my-app
       - name: Build
         run: npm run build
         working-directory: my-app
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./my-app/dist
+          path: './my-app/dist'
+jobs:
+  deploy:
+      - name: Deploy to GitHub Pages
+        id: Deployment
+        uses: actions/deploy-pages@v2
