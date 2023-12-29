@@ -27,7 +27,7 @@ export function Search() {
             console.log(s[selected()].title);
             setContentUrl(s[selected()].title);
             window.scrollTo({ top: 0, behavior: 'instant' });
-            window.history.pushState({}, "", `${s[selected()].title}`);
+            window.history.pushState({}, "", `?title=${s[selected()].title}`);
             setSearchActive(false);
         }
     });

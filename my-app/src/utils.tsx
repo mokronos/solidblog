@@ -22,13 +22,12 @@ export function keyBind(key: string, fn: any) {
 
 export function handleUrlChange() {
 
-    const page = window.location.pathname.split('/').pop();
-
-    if (page) {
-        setContentUrl(page);
-    } else {
-        setContentUrl("help");
+    let params = new URLSearchParams(window.location.search);
+    let page = params.get('title');
+    if (page === null) {
+        page = "help";
     }
+    setContentUrl(page);
 }
 
 export function rightSwipe(fn: any) {
