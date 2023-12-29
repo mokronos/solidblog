@@ -30,6 +30,9 @@ jobs:
       - name: Run script
         run: cargo run
         working-directory: converter
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v3
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -46,6 +49,9 @@ jobs:
           path: './my-app/dist'
   deploy:
     name: Deploy to GitHub Pages
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
     steps:
