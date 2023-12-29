@@ -21,7 +21,7 @@ jobs:
       - name: Run script
         run: cd converter && cargo run && cd ..
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: 'latest'
       - name: Change directory
