@@ -9,13 +9,15 @@ jobs:
     name: Convert md to html
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Setup Rust
         uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
           override: true
       - name: Run script
-        run: cd convert && cargo run && cd ..
+        run: cd converter && cargo run && cd ..
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
