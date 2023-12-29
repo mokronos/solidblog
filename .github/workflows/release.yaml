@@ -19,7 +19,8 @@ jobs:
       - name: create target folder
         run: mkdir my-app/public/data
       - name: Run script
-        run: cd converter && cargo run && cd ..
+        run: cargo run
+        working-directory: converter
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -32,7 +33,6 @@ jobs:
         working-directory: my-app
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
-        working-directory: my-app
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+          publish_dir: ./my-app/dist
