@@ -14,8 +14,10 @@ jobs:
       - name: Setup Rust
         uses: actions-rs/toolchain@v1
         with:
-          toolchain: stable
+          toolchain: nightly
           override: true
+      - name: create target folder
+        run: mkdir my-app/public/data
       - name: Run script
         run: cd converter && cargo run && cd ..
       - name: Setup Node.js
