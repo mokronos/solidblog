@@ -2,15 +2,9 @@ use std::fs;
 use std::collections::HashMap;
 use markdown::{
     to_html_with_options,
-    to_html,
     Constructs,
     Options,
     ParseOptions, CompileOptions,
-};
-use pulldown_cmark::{
-    Parser,
-    html,
-    Options as pullOptions,
 };
 
 fn main() {
@@ -48,41 +42,27 @@ fn main() {
         .expect("Something went wrong writing the file");
 }
 
-fn markdown_to_html_alt(content: &str) -> String {
-
-    let mut options = pullOptions::empty();
-    options.insert(pullOptions::ENABLE_STRIKETHROUGH);
-    let parser = Parser::new_ext(content, options);
-    let mut html_output = String::new();
-    html::push_html(&mut html_output, parser);
-    html_output
-}
-
 fn markdown_to_html(content: &str) -> String {
     let custom = Options {
         parse: ParseOptions {
             constructs: Constructs {
                 frontmatter: true,
-                ..Constructs::default()
+                ..Constructs::gfm()
             },
-            ..ParseOptions::default()
+            ..ParseOptions::gfm()
         },
         compile: CompileOptions {
             allow_dangerous_html: true,
-            ..CompileOptions::default()
+            ..CompileOptions::gfm()
         },
-        ..Options::default()
+        ..Options::gfm()
     };
 
     let content_html = to_html_with_options(
         content,
         &custom,
         );
-    // let content_html = to_html_with_options(
-    //     content,
-    //     &Options::default(),
-    //     );
-    // content_html.unwrap()
+
     content_html.unwrap()
 }
 

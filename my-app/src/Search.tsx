@@ -93,6 +93,7 @@ function SearchResults() {
     <For each={searchResults()}>
     {(item, i) => <li
     classList={{'text-orange-400': selected() === i()}}
+    class="mb-0.5 cursor-pointer list-none hover:text-orange-400"
     onClick={() => {
         setSelected(i());
         document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));

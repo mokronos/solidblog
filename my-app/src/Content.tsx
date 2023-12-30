@@ -18,7 +18,7 @@ export function Content(props: {url: Accessor<string>}) {
     return (
     <>
     <div
-    class="mx-auto max-w-3xl px-4 text-justify sm:px-6 lg:px-8"
+    class="mx-auto max-w-4xl px-4 text-justify sm:px-6 lg:px-8"
     innerHTML={content()}>
     </div>
     </>

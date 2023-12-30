@@ -100,7 +100,7 @@ button:focus-visible {
 
     /* Paragraph Styles */
     p {
-      @apply text-gray-200 mb-4;
+      @apply text-gray-200 mb-4 text-lg
     }
 
     /* List Styles */
