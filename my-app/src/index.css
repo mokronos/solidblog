@@ -72,68 +72,75 @@ button:focus-visible {
   color: #ffffff;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+
 @layer base {
     /* Heading Styles */
+    h1, h2, h3, h4, h5, h6 {
+        @apply text-left font-bold text-gray-300 mb-4;
+    }
     h1 {
-      @apply text-3xl font-bold text-gray-300 mb-4;
+        @apply text-3xl;
     }
 
     h2 {
-      @apply text-2xl font-bold text-gray-300 mb-4;
+        @apply text-2xl;
     }
 
     h3 {
-      @apply text-xl font-bold text-gray-300 mb-4;
+        @apply text-xl;
     }
 
     h4 {
-      @apply text-lg font-bold text-gray-300 mb-4;
+        @apply text-lg;
     }
 
     h5 {
-      @apply text-base font-bold text-gray-300 mb-4;
+        @apply text-base;
     }
 
     h6 {
-      @apply text-sm font-bold text-gray-300 mb-4;
+        @apply text-sm;
     }
 
     /* Paragraph Styles */
     p {
-      @apply text-gray-200 mb-4 text-lg
+        @apply text-gray-200 mb-4 text-lg
     }
 
     /* List Styles */
     ul,
     ol {
-      @apply list-inside list-disc text-gray-400 mb-4;
+        @apply list-inside list-disc text-gray-400 mb-4;
     }
 
     li {
-      @apply mb-2;
+        @apply mb-2;
     }
 
     /* Code Block Styles */
     pre {
-      @apply bg-gray-800 text-gray-200 p-2 rounded-lg mb-4;
+        @apply bg-gray-800 text-gray-200 p-2 rounded-lg mb-4;
     }
 
     /* Blockquote Styles */
     blockquote {
-      @apply border-l-4 border-gray-300 italic pl-4 text-gray-400 mb-4;
+        @apply border-l-4 border-gray-300 italic pl-4 text-gray-400 mb-4;
     }
 
     /* Link Styles */
     a {
-      @apply text-blue-500 underline hover:text-blue-700;
+        @apply text-blue-500 underline hover:text-blue-700;
     }
 
     /* Details Styles */
     details {
-      @apply mb-4;
+        @apply mb-4;
     }
 
     details[open] summary {
-      @apply border border-gray-300 rounded-lg;
+        @apply border border-gray-300 rounded-lg;
     }
 }
