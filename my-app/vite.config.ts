@@ -4,4 +4,7 @@ import solid from 'vite-plugin-solid'
 export default defineConfig({
   plugins: [solid()],
   base: '/solidblog/',
+  esbuild: {
+      drop: ['console', 'debugger'],
+  },
 })
