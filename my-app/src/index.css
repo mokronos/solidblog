@@ -136,11 +136,13 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     /* Details Styles */
+    /* Border + padding need to add up between open and closed states */
+    /* so it doesn't shift when opening */
     details {
-        @apply mb-4;
+        @apply mb-4 p-2;
     }
 
-    details[open] summary {
-        @apply border border-gray-300 rounded-lg;
+    details[open] {
+        @apply border-4 border-gray-600 rounded-lg shadow-md p-1;
     }
 }
