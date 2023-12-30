@@ -78,6 +78,7 @@ pub fn parse_frontmatter(content: &str, filename: &str, id: u64) -> HashMap<Stri
     frontmatter.insert("title".to_string(), filename.to_string());
     frontmatter.insert("date".to_string(), "2020-01-01".to_string());
     frontmatter.insert("id".to_string(), id.to_string());
+    frontmatter.insert("tag".to_string(), format!("tag{}", id));
 
     if !content.starts_with("---\n") {
         return frontmatter;

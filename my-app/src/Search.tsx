@@ -43,7 +43,7 @@ export function Search() {
                 return;
             }
             let results = ms()!.search(query(),
-                { prefix: true, fuzzy: 0.2, boost: { title: 2 } }
+                { prefix: true, fuzzy: 5, boost: { title: 2 } }
                 );
             setSearchResults(results);
         }
@@ -76,8 +76,8 @@ export function Search() {
 
 function createMs(data: any) {
     let ms = new MiniSearch({
-        fields: ['title'],
-        storeFields: ['title', 'date']
+        fields: ['title', 'tag'],
+        storeFields: ['title', 'date', 'tag'],
     });
     ms.addAll(data);
     console.log(ms);
@@ -98,7 +98,7 @@ function SearchResults() {
         setSelected(i());
         document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
     }}
-    >{item.title}</li>}
+    >{item.title} | {item.tag}</li>}
     </For>
     </ul>
     </>
