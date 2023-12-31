@@ -127,6 +127,6 @@ const fetchData = async () => {
     const response = await fetch(url);
     const json = await response.json();
     console.log(`fetched ${url}`);
-    json.forEach(j => j.titlePrepared = fzf.prepare(j.title));
+    json.forEach((j:any) => j.titlePrepared = fzf.prepare(j.title));
     return json;
 }
