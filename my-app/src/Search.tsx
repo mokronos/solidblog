@@ -24,10 +24,10 @@ export function Search() {
         let s = searchResults();
         console.log("enter pressed, search results: ", s);
         if (s.length > 0) {
-            console.log(s[selected()].title);
-            setContentUrl(s[selected()].title);
+            console.log(s[selected()].obj.title);
+            setContentUrl(s[selected()].obj.title);
             window.scrollTo({ top: 0, behavior: 'instant' });
-            window.history.pushState({}, "", `?title=${s[selected()].title}`);
+            window.history.pushState({}, "", `?title=${s[selected()].obj.title}`);
             setSearchActive(false);
         }
     });
@@ -37,15 +37,8 @@ export function Search() {
 
     createEffect(() => {
         if (data()) {
-            if (query() === "") {
-                setSearchResults(data().map((d: any) => d.title));
-                return;
-            }
             let results = fzf.go(query(), data(), {key: 'title', all: true});
-            let results_hl = results.map((r: any) => fzf.highlight(r, '<span class="font-semibold text-blue-300">', '</span>'));
-            // let results = fzf.go(query(), data(), {keys: ['title', 'tag'], all: true});
-            // let results_hl = results.map((r: any) => r.map((s: any) => fzf.highlight(s, '<span class="font-semibold text-blue-300">', '</span>')).join('|'));
-            setSearchResults(results_hl);
+            setSearchResults(results);
         }
     });
 
@@ -98,7 +91,16 @@ function SearchResults() {
         setSelected(i());
         document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
     }}
-    innerHTML={item}>
+    // innerHTML={item.hasOwnProperty('title') ? item.title : fzf.highlight(item, '<span class="text-blue-300 text-semibold">', '</span>')}>
+    innerHTML={
+        (() => {
+            try {
+                return fzf.highlight(item, '<span class="text-blue-300 text-semibold">', '</span>');
+            } catch (e) {
+                return item.obj.title;
+            }
+        })()
+    }>
     </li>}
     </For>
     </ul>
@@ -125,5 +127,6 @@ const fetchData = async () => {
     const response = await fetch(url);
     const json = await response.json();
     console.log(`fetched ${url}`);
+    json.forEach(j => j.titlePrepared = fzf.prepare(j.title));
     return json;
 }

@@ -77,10 +77,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @layer base {
+
     /* Heading Styles */
     h1, h2, h3, h4, h5, h6 {
         @apply text-left font-bold text-gray-300 mb-4;
     }
+
     h1 {
         @apply text-3xl;
     }
@@ -107,7 +109,7 @@ h1, h2, h3, h4, h5, h6 {
 
     /* Paragraph Styles */
     p {
-        @apply text-gray-200 mb-4 text-lg
+        @apply text-gray-200 mb-4 text-lg;
     }
 
     /* List Styles */
@@ -144,5 +146,22 @@ h1, h2, h3, h4, h5, h6 {
 
     details[open] {
         @apply border-4 border-gray-600 rounded-lg shadow-md p-1;
+    }
+
+    table {
+      @apply border-separate border-spacing-2 border-4 border-slate-500 rounded-lg mb-4 shadow-md shadow-slate-500;
+    }
+
+    th, td {
+      @apply border-slate-600 border-2 p-2 rounded-md;
+    }
+
+    th {
+      @apply bg-slate-600;
+    }
+
+    /* Hover styles for better interactivity */
+    td:hover {
+      @apply bg-slate-700;
     }
 }
