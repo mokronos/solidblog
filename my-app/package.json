@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "fuzzysort": "^2.0.4",
     "minisearch": "^6.3.0",
     "solid-js": "^1.8.7"
   },

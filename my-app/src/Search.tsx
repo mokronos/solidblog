@@ -1,13 +1,13 @@
 import { For, createSignal, createResource, createEffect } from "solid-js";
-import MiniSearch from "minisearch";
+import fzf from "fuzzysort";
 import { keyBind, rightSwipe } from "./utils";
 
 const initialSearchIndex = 0;
 
-const [query, setQuery] = createSignal<string>("help");
+const [query, setQuery] = createSignal<string>("");
 export const [contentUrl, setContentUrl] = createSignal<string>("help");
 export const [searchActive, setSearchActive] = createSignal<boolean>(false);
-const [searchResults, setSearchResults] = createSignal<any[]>([]);
+const [searchResults, setSearchResults] = createSignal<any>([]);
 const [selected, setSelected] = createSignal<number>(initialSearchIndex);
 
 
@@ -16,7 +16,7 @@ export function Search() {
     console.log("mounting search");
 
     const [data] = createResource(fetchData);
-    const [ms] = createResource(data, createMs);
+    // const [ms] = createResource(data, createMs);
 
     keyBind('ArrowUp', () => setSelected((selected() + 1) % searchResults().length));
     keyBind('ArrowDown', () => setSelected(((selected() - 1) + searchResults().length) % searchResults().length));
@@ -35,17 +35,17 @@ export function Search() {
 
     rightSwipe(() => setSearchActive(true));
 
-
     createEffect(() => {
-        if (ms()?.search) {
+        if (data()) {
             if (query() === "") {
-                setSearchResults(data());
+                setSearchResults(data().map((d: any) => d.title));
                 return;
             }
-            let results = ms()!.search(query(),
-                { prefix: true, fuzzy: 5, boost: { title: 2 } }
-                );
-            setSearchResults(results);
+            let results = fzf.go(query(), data(), {key: 'title', all: true});
+            let results_hl = results.map((r: any) => fzf.highlight(r, '<span class="font-semibold text-blue-300">', '</span>'));
+            // let results = fzf.go(query(), data(), {keys: ['title', 'tag'], all: true});
+            // let results_hl = results.map((r: any) => r.map((s: any) => fzf.highlight(s, '<span class="font-semibold text-blue-300">', '</span>')).join('|'));
+            setSearchResults(results_hl);
         }
     });
 
@@ -74,15 +74,15 @@ export function Search() {
     )
 }
 
-function createMs(data: any) {
-    let ms = new MiniSearch({
-        fields: ['title', 'tag'],
-        storeFields: ['title', 'date', 'tag'],
-    });
-    ms.addAll(data);
-    console.log(ms);
-    return ms;
-}
+// function createMs(data: any) {
+//     let ms = new MiniSearch({
+//         fields: ['title', 'tag'],
+//         storeFields: ['title', 'date', 'tag'],
+//     });
+//     ms.addAll(data);
+//     console.log(ms);
+//     return ms;
+// }
 
 function SearchResults() {
 
@@ -93,12 +93,13 @@ function SearchResults() {
     <For each={searchResults()}>
     {(item, i) => <li
     classList={{'text-orange-400': selected() === i()}}
-    class="mb-0.5 cursor-pointer list-none hover:text-orange-400"
+    class="mb-0.5 cursor-pointer list-none"
     onClick={() => {
         setSelected(i());
         document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
     }}
-    >{item.title} | {item.tag}</li>}
+    innerHTML={item}>
+    </li>}
     </For>
     </ul>
     </>
