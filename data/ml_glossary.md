@@ -280,3 +280,33 @@ class Net(nn.Module):
 
 In sklearn we need a custom implementation for a dropout layer.
 </details>
+
+## Sample Space
+
+The set of all possible outcomes of a random experiment.
+
+## Distribution
+
+A distribution is a function that assigns probabilities to the outcomes of a random experiment.
+A normal distribution has lower probabilities for extreme values and higher probabilities for values close to the mean.
+A uniform distribution has the same probability for all values.
+A bimodal distribution is similar to a normal distribution, but has two peaks instead of one.
+There can also be a skewed normal distribution, where the probability is higher for one side of the distribution.
+
+## Sampling Distribution
+
+A sampling distribution is the distribution of a statistic, like the mean, if we take many samples from a population.
+If we pick multiple samples from a normal distribution, the sampling distribution will also be normal, but skinnier, or a lower variance.
+When picking many samples it gets more unlikely that the average of those samples is at the extremes of the distribution.
+
+## p-value
+
+The p-value is the probability of observing a test statistic at least as extreme as the one observed, given that the null hypothesis is true.
+If the p-value is small, it is more likely that the null hypothesis can be rejected.
+The point where the p-value is small enough to reject the null hypothesis is called the significance level (usually 0.05).
+
+## p-hacking
+
+P-hacking is the practice of trying many different statistical tests until one finds a significant result (p < 0.05).
+For example, if we have a dataset with 100 features and we test each feature for correlation with the target variable, we will find 5 features that are correlated with the target variable by chance.
+Better practice is to have a hypothesis before looking at the data and then test that hypothesis.
